@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "database": "symfony",
+            "driver": "MariaDB",
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "name": "Devilbox",
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "127.0.0.1",
+            "username": "root"
+        }
+    ]
+}
