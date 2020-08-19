@@ -20,7 +20,7 @@
 						<li class="nav-item">
 							<a class="nav-link {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}" href="{{ path('property.index') }}">Acheter</a>
 						</li>
-						{% if app.user == false %}
+						{% if not app.user %}
 							<li class="nav-item">
 								<a class="nav-link {% if current_menu is defined and current_menu == 'login' %}active{% endif %}" href="http://inmogence.loc/login">Login</a>
 							</li>
