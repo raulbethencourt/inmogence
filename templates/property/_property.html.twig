@@ -5,8 +5,14 @@
 				{{ property.title }}
 			</a>
 		</h4>
-		<p class="card-text">{{ property.surface }} m² - {{ property.city }}
-			({{ property.postalCode }})</p>
+		<p class="card-text">{{ property.surface }}
+			m² -
+			{{ property.city }}
+			({{ property.postalCode }})
+			{% if property.stringoptions %}
+				/
+				{{ property.stringoptions }}</p>
+		{% endif %}
 		<div class="text-primary" style="font-size:2rem; font-weight:bold;">
 			{{ property.formattedPrice }}
 		</div>
