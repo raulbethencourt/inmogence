@@ -321,20 +321,6 @@ class Property
         return $this->options;
     }
 
-    /**
-     * @return string
-     */
-    public function getStringOptions(): string
-    {
-        $options = $this->options->toArray();
-        //dd($options);
-        $test = [];
-        foreach ($options as $v) {
-            array_push($test, $v->getName());
-        }
-        return implode(', ', $test);
-    }
-
     public function addOption(Option $option): self
     {
         if (!$this->options->contains($option)) {

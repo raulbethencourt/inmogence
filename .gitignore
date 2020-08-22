@@ -19,3 +19,4 @@ node_modules
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
+public/images/properties/

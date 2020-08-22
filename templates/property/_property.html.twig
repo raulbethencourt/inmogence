@@ -1,6 +1,8 @@
 <div class="card mb-4">
 	{% if property.imagename %}
 		<img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb')}}" alt="card-img-top" style="width:100%; height:auto;">
+	{% else %}
+		<img src="{{ "/images/properties/index.jpeg" | imagine_filter('thumb')}}" alt="card-img-top" style="width:100%; height:auto;">
 	{% endif %}
 	<div class="card-body">
 		<h4 class="card-title">
@@ -11,13 +13,12 @@
 		<p class="card-text">{{ property.surface }}
 			m² -
 			{{ property.city }}
-			({{ property.postalCode }})
-			{% if property.stringoptions %}
-				/
-				{{ property.stringoptions }}</p>
-		{% endif %}
-		<div class="text-primary" style="font-size:2rem; font-weight:bold;">
-			{{ property.formattedPrice }}
-		</div>
+			({{ property.postalCode }}) /
+			{% for option in property.options %}
+				{{ option.name }}
+			{% endfor %}
+			<div class="text-primary" style="font-size:2rem; font-weight:bold;">
+				{{ property.formattedPrice }}</div>
+		</p>
 	</div>
 </div>
