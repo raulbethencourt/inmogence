@@ -2,16 +2,20 @@
 
 namespace App\Entity;
 
-use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Cocur\Slugify\Slugify;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
  * @UniqueEntity(fields = {"title"})
+ * @Vich\Uploadable
  */
 class Property
 {
@@ -31,7 +35,6 @@ class Property
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=5,max=255)
-     *
      */
     private $title;
 
@@ -42,7 +45,7 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min = 10,max = 400)
+     * @Assert\Range(min=10,max=400)
      */
     private $surface;
 
@@ -82,7 +85,7 @@ class Property
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string",length=255)
      * @Assert\Regex(pattern="/^[0-9]{5}/")
      */
     private $postal_code;
@@ -101,6 +104,32 @@ class Property
      * @ORM\ManyToMany(targetEntity=Option::class, inversedBy="properties")
      */
     private $options;
+
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="property_image", fileNameProperty="imageName")
+     * @Assert\Image(
+     *     mimeTypes = {"image/jpeg"}
+     * )
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string|null
+     */
+    private $imageName;
 
     public function __construct()
     {
@@ -322,6 +351,45 @@ class Property
             $this->options->removeElement($option);
             $option->removeProperty($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return  File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\File|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return  string|null
+     */
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param   string|null  $imageName  
+     * @return  self
+     */
+    public function setImageName($imageName): self
+    {
+        $this->imageName = $imageName;
 
         return $this;
     }
