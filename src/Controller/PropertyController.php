@@ -91,10 +91,10 @@ class PropertyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $notification->notify($contact);
             $this->addFlash('success', "Votre email a bien été envoyé");
-            // return $this->redirectToRoute('property.show', [
-            //     'id' => $property->getId(),
-            //     'slug' => $property->getSlug()
-            // ]);
+            return $this->redirectToRoute('property.show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ]);
         }
 
         return $this->render('property/show.html.twig', [
