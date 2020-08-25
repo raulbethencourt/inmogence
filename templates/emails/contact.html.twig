@@ -1,0 +1,29 @@
+<h1>{{ email.subject }}</h1>
+<table class="table table-bordered table-inverse table-responsive">
+	<tbody>
+		<tr>
+			<td scope="row">Nom du bien : </td>
+			<td><a href="{{ url('property.show',{id: contact.property.id, slug: contact.property.slug}) }}">{{ contact.property.title }}</a></td>
+		</tr>
+		<tr>
+			<td scope="row">Prénom</td>
+			<td>{{ contact.firstname }}</td>
+		</tr>
+		<tr>
+			<td scope="row">Nom</td>
+			<td>{{ contact.lastname }}</td>
+		</tr>
+		<tr>
+			<td scope="row">Téléphone</td>
+			<td>{{ contact.phone }}</td>
+		</tr>
+		<tr>
+			<td scope="row">Email</td>
+			<td>{{ contact.email }}</td>
+		</tr>
+		<tr>
+			<td scope="row">Message</td>
+			<td>{{ contact.message | nl2br }}</td>
+		</tr>
+	</tbody>
+</table>

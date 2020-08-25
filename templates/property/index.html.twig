@@ -6,17 +6,17 @@
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			{{ form_start(form) }}
-			<div class="form-row align-items-end">
+			<div class="form-row">
 				<div class="col">
 					{{ form_row(form.minSurface) }}
 				</div>
 				<div class="col">
 					{{ form_row(form.maxPrice) }}
+				</div><div class="col">
+					{{ form_row(form.options) }}
 				</div>
 				<div class="col">
-					<div class"form-group">
-						<button type="submit" class="btn btn-secondary">Rechercher</button>
-					</div>
+					<button type="submit" class="btn btn-secondary">Rechercher</button>
 				</div>
 			</div>
 			{{ form_end(form) }}
