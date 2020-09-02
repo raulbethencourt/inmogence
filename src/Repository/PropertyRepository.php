@@ -8,6 +8,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder as ORMQueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Property|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,15 +19,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PropertyRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Property::class);
+        $this->paginator = $paginator;
     }
 
     /**
-     * @return Query
+     * @param \App\Entity\PropertySearch $search
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
      */
-    public function findAllVisibleQuery(PropertySearch $search): Query
+    public function paginateAllVisible(PropertySearch $search, int $page): PaginationInterface
     {
         $query =  $this->findVisibleQuery();
 
@@ -51,7 +60,13 @@ class PropertyRepository extends ServiceEntityRepository
                 ->setParameter('minsurface', $search->getMinSurface());
         }
 
-        return $query->getQuery();
+        $properties = $this->paginator->paginate(
+            $query->getQuery(),
+            $page,
+            12
+        );
+
+        return $properties;
     }
 
     /**
