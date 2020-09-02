@@ -44,8 +44,9 @@
         "symfony/web-link": "5.1.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "5.1.*",
+        "twig/cache-extension": "^1.4",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0",
+        "twig/twig": "v2.13.1",
         "vich/uploader-bundle": "^1.15"
     },
     "require-dev": {

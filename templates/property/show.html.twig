@@ -21,7 +21,7 @@
 						m²</h2>
 					<div class="text-primary" style="font-size: 4rem; font-weight: bold;">{{ property.formattedPrice }}
 						€</div>
-					<a name="btn" id="btn" class="btn btn-primary" href="#" role="button">contacer l'agence</a>
+					<a name="btn" id="contactBtn" class="btn btn-secondary" href="#" role="button" {% if form.vars.submitted %} style="display:none;" {% endif %}>Contacer l'agence</a>
 
 					{% for message in app.flashes('success') %}
 						<div class="alert alert-success mt-4">
@@ -35,7 +35,7 @@
 						</div>
 					{% endif %}
 
-					<div class="mt-4" id="contactForm">
+					<div class="mt-4" id="contactForm" {% if not form.vars.submitted %} style="display:none;" {% endif %}>
 						{{ form_start(form) }}
 						<div class="row">
 							<div class="col">{{ form_row(form.firstname) }}</div>

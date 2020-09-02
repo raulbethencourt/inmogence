@@ -8,13 +8,15 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server --public http://inmogence.loc:80 --host 127.0.0.1 --disable-host-check",
+        "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@babel/preset-flow": "^7.10.4",
         "jquery": "^3.5.1",
-        "select2": "^4.0.13"
+        "select2": "^4.0.13",
+        "styled-jsx": "^1.0.1"
     }
 }

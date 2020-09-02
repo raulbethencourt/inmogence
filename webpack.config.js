@@ -7,9 +7,9 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 // will be applied for `encore dev --watch` and `encore dev-server` commands
-Encore.configureWatchOptions((watchOptions) => {
-  watchOptions.poll = 250; // check for changes every 250 milliseconds
-});
+// Encore.configureWatchOptions((watchOptions) => {
+//   watchOptions.poll = 250; // check for changes every 250 milliseconds
+// });
 
 Encore
   // directory where compiled assets will be stored
@@ -17,7 +17,7 @@ Encore
   // public path used by the web server to access the output path
   .setPublicPath("/build")
   // only needed for CDN's or sub-directory deploy
-  .setManifestKeyPrefix("build/")
+  //.setManifestKeyPrefix("build/")
 
   /*
    * ENTRY CONFIG
@@ -51,7 +51,22 @@ Encore
   .enableSourceMaps(!Encore.isProduction())
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
+  .configureBabel(function(babelConfig) {
+    // add additional presets
+    babelConfig.presets.push('@babel/preset-flow');
 
+    // no plugins are added by default, but you can add some
+    babelConfig.plugins.push('styled-jsx/babel');
+}, {
+    // node_modules is not processed through Babel by default
+    // but you can whitelist specific modules to process
+    includeNodeModules: ['foundation-sites'],
+
+    // or completely control the exclude rule (note that you
+    // can't use both "includeNodeModules" and "exclude" at
+    // the same time)
+    //exclude: /bower_components/
+})
   // enables @babel/preset-env polyfills
   .configureBabelPresetEnv((config) => {
     config.useBuiltIns = "usage";

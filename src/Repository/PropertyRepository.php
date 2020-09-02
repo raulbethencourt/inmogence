@@ -71,6 +71,8 @@ class PropertyRepository extends ServiceEntityRepository
     private function findVisibleQuery(): ORMQueryBuilder
     {
         return $this->createQueryBuilder('p')
+            /*->select('p', 'opt')
+            ->leftJoin('p.options', 'opt')*/
             ->where('p.sold = false');
     }
 
