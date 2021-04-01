@@ -1,0 +1,24 @@
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.30.0",
+        "core-js": "^3.10.0",
+        "regenerator-runtime": "^0.13.2",
+        "webpack-notifier": "^1.13.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@babel/preset-flow": "^7.13.13",
+        "jquery": "^3.6.0",
+        "node-forge": "^0.10.0",
+        "object-path": "^0.11.5",
+        "select2": "^4.0.13",
+        "styled-jsx": "^1.0.11"
+    }
+}
